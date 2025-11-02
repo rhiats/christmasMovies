@@ -30,3 +30,12 @@ rating_min = st.sidebar.slider("Minimum IMDb Rating", 0.0, 10.0, 5.0)
 # Genre filter
 all_genres = df['genres'].explode().unique()
 selected_genres = st.sidebar.multiselect("Select Genres", all_genres)
+
+# Apply filters
+filtered = df[df['release_year'].between(*year_range)]
+filtered = filtered[filtered['imdb_rating'] >= rating_min]
+if selected_genres:
+    filtered = filtered[filtered['genres'].apply(lambda x: any(g in x for g in selected_genres))]
+
+st.write(f"### Showing {len(filtered)} movies")
+st.dataframe(filtered[['title','release_year','imdb_rating','genres']])
