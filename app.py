@@ -15,3 +15,11 @@ def load_data():
 df = load_data()
 
 st.title("🎄 Christmas Movie Explorer")
+
+# --- Sidebar filters ---
+st.sidebar.header("Filter Movies")
+
+# Year range
+year_min = int(df['release_year'].min())
+year_max = int(df['release_year'].max())
+year_range = st.sidebar.slider("Year Range", year_min, year_max, (2000, 2025))
