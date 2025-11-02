@@ -26,3 +26,7 @@ year_range = st.sidebar.slider("Year Range", year_min, year_max, (2000, 2025))
 
 # IMDb rating
 rating_min = st.sidebar.slider("Minimum IMDb Rating", 0.0, 10.0, 5.0)
+
+# Genre filter
+all_genres = df['genres'].explode().unique()
+selected_genres = st.sidebar.multiselect("Select Genres", all_genres)
