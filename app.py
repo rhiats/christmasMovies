@@ -54,4 +54,13 @@ if selected_genres:
 st.write(f"### Showing {len(filtered)} movies")
 st.dataframe(filtered[['title','release_year','imdb_rating','genres']])
 
+# --- Visualizations ---
+st.write("### 🎬 Movies Per Year")
+movies_per_year = filtered.groupby('release_year')['title'].count()
+fig, ax = plt.subplots()
+movies_per_year.plot(kind='bar', ax=ax)
+ax.set_xlabel("Year")
+ax.set_ylabel("Number of Movies")
+st.pyplot(fig)
+
 
