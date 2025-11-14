@@ -14,7 +14,28 @@ def load_data():
 
 df = load_data()
 
-st.title("🎄 Christmas Movie Explorer")
+st.markdown(
+    """
+    <style>
+    .christmas-title {
+        color: #B30000;
+        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+        animation: glow 2s ease-in-out infinite alternate;
+        text-align: center;
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #FFD700; }
+        to { text-shadow: 0 0 25px #FFD700; }
+    }
+    </style>
+
+    <h1 class="christmas-title">🎄 Christmas Movie Explorer 🎅</h1>
+    """,
+    unsafe_allow_html=True
+)
 
 # --- Sidebar filters ---
 st.sidebar.header("Filter Movies")
