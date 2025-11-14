@@ -88,6 +88,6 @@ sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 top_sim_idx = [i[0] for i in sim_scores[1:6]]  # exclude self
 
 st.write(f"#### Movies similar to **{movie_title}**:")
-st.table(df.iloc[top_sim_idx][['title','year','rating','genres']])
+st.table(df.iloc[top_sim_idx][['title','release_year','rating','genres']])
 
 
