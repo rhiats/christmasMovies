@@ -65,7 +65,7 @@ df['genres'] = (
     .apply(lambda x: x if isinstance(x, list) else [])
 )
 
-print(df['release_year'])
+#print(df['release_year'])
 
 # Apply filters
 filtered = df[df['release_year'].between(*year_range)]
@@ -73,11 +73,23 @@ filtered = filtered[filtered['imdb_rating'] >= rating_min]
 if selected_genres:
     filtered = filtered[filtered['genres'].apply(lambda x: any(g in x for g in selected_genres))]
 
-st.write(f"### Showing {len(filtered)} movies")
+#st.write(f"### Showing {len(filtered)} movies")
+
+st.markdown(
+    f"<h3 style='color:#B30000;'>Showing {len(filtered)} movies</h3>",
+    unsafe_allow_html=True
+)
+
 st.dataframe(filtered[['title','release_year','imdb_rating','genres']])
 
 # --- Visualizations ---
-st.write("### 🎬 Movies Per Year")
+#st.write("### 🎬 Movies Per Year")
+
+st.markdown(
+    "<h3 style='color:#B30000;'>🎬 Movies Per Year</h3>",
+    unsafe_allow_html=True
+)
+
 movies_per_year = filtered.groupby('release_year')['title'].count()
 fig, ax = plt.subplots()
 movies_per_year.plot(kind='bar', ax=ax)
@@ -85,7 +97,11 @@ ax.set_xlabel("Year")
 ax.set_ylabel("Number of Movies")
 st.pyplot(fig)
 
-st.write("### 📊 Genre Distribution")
+#st.write("### 📊 Genre Distribution")
+st.markdown(
+    "<h3 style='color:#B30000;'>📊 Genre Distribution</h3>",
+    unsafe_allow_html=True
+)
 genre_counts = filtered['genres'].explode().value_counts()
 fig2, ax2 = plt.subplots()
 genre_counts.plot(kind='barh', ax=ax2)
@@ -94,7 +110,10 @@ ax2.set_ylabel("Genre")
 st.pyplot(fig2)
 
 # --- Movie Recommendation ---
-st.write("### 🎯 Find Similar Movies")
+st.markdown(
+    "<h3 style='color:#B30000;'>🎯 Find Similar Movies</h3>",
+    unsafe_allow_html=True
+)
 
 movie_title = st.selectbox("Select a movie to find similar ones:", filtered['title'].tolist())
 
