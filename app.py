@@ -63,4 +63,12 @@ ax.set_xlabel("Year")
 ax.set_ylabel("Number of Movies")
 st.pyplot(fig)
 
+st.write("### 📊 Genre Distribution")
+genre_counts = filtered['genres'].explode().value_counts()
+fig2, ax2 = plt.subplots()
+genre_counts.plot(kind='barh', ax=ax2)
+ax2.set_xlabel("Number of Movies")
+ax2.set_ylabel("Genre")
+st.pyplot(fig2)
+
 
