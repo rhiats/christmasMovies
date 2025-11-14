@@ -71,4 +71,23 @@ ax2.set_xlabel("Number of Movies")
 ax2.set_ylabel("Genre")
 st.pyplot(fig2)
 
+# --- Movie Recommendation ---
+st.write("### 🎯 Find Similar Movies")
+
+movie_title = st.selectbox("Select a movie to find similar ones:", filtered['title'].tolist())
+
+# Compute TF-IDF similarity
+tfidf = TfidfVectorizer(stop_words='english')
+tfidf_matrix = tfidf.fit_transform(df['description'])
+cos_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+# Find top 5 similar movies
+movie_idx = df[df['title'] == movie_title].index[0]
+sim_scores = list(enumerate(cos_sim[movie_idx]))
+sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+top_sim_idx = [i[0] for i in sim_scores[1:6]]  # exclude self
+
+st.write(f"#### Movies similar to **{movie_title}**:")
+st.table(df.iloc[top_sim_idx][['title','year','rating','genres']])
+
 
