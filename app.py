@@ -24,6 +24,7 @@ st.markdown(
         text-align: center;
         font-size: 3em;
         font-weight: bold;
+        font-family: 'Mountains of Christmas', cursive;
     }
 
     @keyframes glow {
